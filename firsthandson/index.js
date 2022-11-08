@@ -1,9 +1,22 @@
 const http = require('http');
-const server = http.createServer((req,res)=>{
-    res.write("<h1>Hello World</h1>")
-    res.write('{"Hello":"World","ProgLang":"Node","Desi":"Developer"}');
-    res.end();
-})
+
+const data = (req,res)=>{
+    const resData ={
+        message:"Welcome to NodeJs World",
+        name: "Send JSON response from NodeJs",
+        category:"NodeJS"
+    }
+    const cont = JSON.stringify(resData)
+    if(req.url === '/')
+    {
+        res.end("<h1>Hello World</h1>");
+    }
+    else if(req.url === '/jsondata')
+    {
+        res.end(cont);
+    }
+}
+const server = http.createServer(data);
 
 server.listen(3000,()=>{
     console.log('App is running');
